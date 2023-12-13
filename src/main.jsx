@@ -7,8 +7,7 @@ import Juego from './juego.jsx';
 
 // Inicializa el juego directamente
 const initGame = () => {
-    // Aquí puedes llamar a la función de inicialización del juego si es necesario
-    // Ejemplo: Juego.init();
+    Juego.init();
 };
 
 // Llama a la función de inicialización del juego al cargar la página
