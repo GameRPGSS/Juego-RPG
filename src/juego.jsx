@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import "./css/juego.css";
 
-export default function Juego() {
+export function init() {
     useEffect(() => {
         async function initPhaser() {
             const Phaser = await import("phaser");
@@ -32,9 +31,4 @@ export default function Juego() {
         }
         initPhaser();
     }, []);
-
-    return (
-        <div id="contenedor_juego" className="contenedorJuego"></div>
-    );
 }
-
