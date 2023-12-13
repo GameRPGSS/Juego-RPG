@@ -7,4 +7,7 @@ export default defineConfig({
     react(),
   ],
   assetsDir: 'assets',
+  server: {
+    port: 8080 // Cambiar el puerto por defecto
+  }
 })
