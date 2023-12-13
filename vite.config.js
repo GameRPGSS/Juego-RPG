@@ -8,6 +8,6 @@ export default defineConfig({
   ],
   assetsDir: 'assets',
   server: {
-    port: 8080 // Cambiar el puerto por defecto
+    port: 443 // Cambiar el puerto por defecto
   }
 })
