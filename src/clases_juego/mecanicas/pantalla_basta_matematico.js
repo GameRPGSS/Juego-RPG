@@ -102,7 +102,7 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                     respuestasCorrectas++;
                     if (respuestasCorrectas === 12) {
                         console.log('¡Todas las respuestas correctas!');
-                        this.scene.start('area_04', { entrada: 'arriba' });
+                        this.scene.start('vendedor_pantalla_principal');
                     }
                 } else {
                     console.log('Respuesta incorrecta');
