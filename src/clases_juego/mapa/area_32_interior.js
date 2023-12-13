@@ -44,10 +44,7 @@ export class Area_32_Interior extends Phaser.Scene {
     create () {
 
         this.datosJg = new Datos_Jugador()
-        if (qtesResueltos.includes('QTE1')) {
-            this.datosJg.actualzizarAyudaControlesNPC_Disponible()
-        }
-
+        
         cursors.acciones.interactuar = this.input.keyboard.addKey('F')
         cursors.acciones.pasarDialogo = this.input.keyboard.addKey('SPACE')
 
