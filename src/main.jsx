@@ -1,5 +1,6 @@
 // import ReactDOM from 'react-dom/client' // Elimina esta línea si no la necesitas
-import Juego from './juego.jsx';
+import { Juego } from './juego.jsx';
+
 
 // ReactDOM.createRoot(document.getElementById('root')).render(
 //     <Juego/>
