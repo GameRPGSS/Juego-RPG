@@ -17,6 +17,12 @@ export class modificarScene extends Phaser.Scene {
             '_fondo_basta_mate'
         ).setOrigin(0.5).setScale(0.756)
 
+        this.add.image(
+            this.game.canvas.width / 2,
+            this.game.canvas.height / 2,
+            '_fondo_formularios'
+        ).setOrigin(0.5).setScale(0.756)
+
         const it = localStorage.getItem('itemModificar');
         const item = JSON.parse(it);
 
@@ -40,42 +46,43 @@ export class modificarScene extends Phaser.Scene {
             color: '#000000',
         }).setOrigin(0.5);
 
-        this.add.text(380, 185, 'Contexto:', {
+        this.add.text(330, 185, 'Contexto:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
         this.add.dom(624, 230).createFromHTML(`<textarea id="contexto" placeholder="Juan necesita hacer una bomba..." style="${styleTextArea}">${item.attributes.contexto}</textarea>`);
 
-        this.add.text(850, 185, 'Pregunta:', {
+        this.add.text(800, 185, 'Pregunta:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
         this.add.dom(1095, 230).createFromHTML(`<textarea id="pregunta" placeholder="¿Cuánto es 7 - 2?" style="${styleTextArea}">${item.attributes.pregunta}</textarea>`);
 
-        this.add.text(230, 365, 'A quién se refiere:', {
+        this.add.text(210, 365, '¿A quién se refiere?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
         this.add.dom(675, 380).createFromHTML(`<input id="quien" type="text" value=${item.attributes.quien} placeholder="A quién se refiere el contexto : Juan" style="${style}">`);
 
-        this.add.text(255, 410, 'A qué se refiere:', {
+        this.add.text(235, 410, '¿A qué se refiere?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
         this.add.dom(675, 430).createFromHTML(`<input id="que" type="text" value=${item.attributes.que} placeholder="A qué se refiere el contexto : Bomba" style="${style}">`);
 
-        this.add.text(65, 465, 'Qué operación necesita seguir:', {
+        this.add.text(210, 465, '¿Qué operación necesita seguir?:', {
             fontSize: '25px',
             fontStyle: 'bold',
+            wordWrap: { width: 260, useAdvancedWrap: true },
             color: '#000000',
         });
         this.add.dom(624, 510).createFromHTML(`<textarea id="operaciones" placeholder="Qué operación realizas : Restar" style="${styleTextArea}">${item.attributes.operaciones}</textarea>`);
 
-        this.add.text(985, 365, 'Cuál es la respuesta:', {
+        this.add.text(945, 365, '¿Cuál es la respuesta?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',

@@ -3,7 +3,9 @@ let matrizRectangulos = [[], [], [], []]
 let operaciones = ['+', '-', '×', '÷', '√', '²']
 let operacionesPresentadas = []
 let filas, columnas
-let repuestAnterrior
+let repuestAnterrior1
+let repuestAnterrior2
+let repuestAnterrior3
 
 export default class Basta_Matematico {
     constructor(escena, numFilas = 4, numColumnas = 5) {
@@ -20,7 +22,7 @@ export default class Basta_Matematico {
         const y = height * 0.175
 
         for (let col = 0; col < columnas; col++) {
-            let num = Math.floor(Math.random() * (100 * col - 100 * (col - 1) + 1)) + 100 * (col - 1)
+            let num = Math.floor(Math.random() * (10 * col - 10 * (col - 1) + 1)) + 10 * (col - 1)
             let operacion = operaciones[Math.floor(Math.random() * 6)]
             let texto = operacion == '√' ? '√x' : operacion == '²' ? 'x' + operacion : operacion + num
             let varX = x + width * 0.04 * (col * 4 + 1)
@@ -49,7 +51,7 @@ export default class Basta_Matematico {
         for (let fila = 1; fila < filas; fila++) {
             let varY = y + height * 0.06 * (fila * 3 + 1)
 
-            let num = Math.floor(Math.random() * (333 * fila - 333 * (fila - 1) + 1)) + 333 * (fila - 1)
+            let num = Math.floor(Math.random() * (33 * fila - 33 * (fila - 1) + 1)) + 33 * (fila - 1)
 
             matrizRectangulos[fila].push(this.escena.add.rectangle(x + width * 0.04, varY, 200, 100, 0xF1C0B5).setOrigin(0.5))
             matrizOperaciones[fila].push(this.escena.add.text(x + width * 0.04, varY, num, {
@@ -79,10 +81,30 @@ export default class Basta_Matematico {
     comprobarRespuesta (respuesta, fila, col) {
         const elevadorFloor = Math.pow(10, 2)
         let respAux
-        if (repuestAnterrior) {
-            respAux = repuestAnterrior
-        } else {
-            respAux = Number.parseInt(matrizOperaciones[fila][0].text)
+        switch(fila){
+            case 1:
+                    if (repuestAnterrior1) {
+                        respAux = repuestAnterrior1
+                    }else {
+                        respAux = Number.parseInt(matrizOperaciones[fila][0].text);
+                    }
+                break
+            case 2:
+                    if (repuestAnterrior2) {
+                        respAux = repuestAnterrior2
+                    }else {
+                        respAux = Number.parseInt(matrizOperaciones[fila][0].text);
+                    }
+                break
+
+            case 3:
+                    if (repuestAnterrior3) {
+                        respAux = repuestAnterrior3
+                    } else {
+                        respAux = Number.parseInt(matrizOperaciones[fila][0].text);
+                    }
+                break
+            default: respAux = Number.parseInt(matrizOperaciones[fila][0].text);
         }
         switch (operacionesPresentadas[col - 1][0]) {
             case '√':
@@ -111,9 +133,21 @@ export default class Basta_Matematico {
                 break
         }
         if (respAux == respuesta) {
-            repuestAnterrior = respAux
+            switch(fila){
+                case 1:
+                        repuestAnterrior1 = respAux
+                    break
+                case 2:
+                        repuestAnterrior2 = respAux
+                    break
+    
+                case 3:
+                        repuestAnterrior3 = respAux
+                    break
+            }
             return true
+        }else{
+            return false
         }
-        return false
     }
 }

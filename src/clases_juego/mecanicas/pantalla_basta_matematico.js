@@ -1,29 +1,28 @@
 import Phaser from "phaser";
 import Basta_Matematico from "./basta_matematico";
 
-
-let matrizOperaciones, matrizRectangulos
-let posicionMatriz = { col: 1, fila: 1 }
-let valorActual
-let respuestasCorrectas = 0;
-
 export class Pantalla_Basta_Matematico extends Phaser.Scene {
 
     constructor() {
         super({ key: 'basta_matematico' });
     }
-
     preload () {
     }
 
     create () {
-
         this.add.image(
             this.game.canvas.width / 2,
             this.game.canvas.height / 2,
             '_fondo_basta_mate'
         ).setOrigin(0.5).setScale(0.756)
 
+        let matrizOperaciones, matrizRectangulos;
+        let posicionMatriz = { col: 1, fila: 1 };
+        let valorActual;
+        let respuestasCorrectas = 0;
+
+        //alert("Usa las fleclas para desplazarte, delete para eliminar tus respuestas y enter para verificarlas")
+        valorActual ='';
         this.basta = new Basta_Matematico(this)
         const a = this.basta.crearMatriz()
         matrizOperaciones = a.matrizOperaciones
@@ -44,6 +43,7 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                         matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0x2c2c2c)
                         valorActual = matrizOperaciones[posicionMatriz.fila][posicionMatriz.col]
                     }
+                
                     break
                 case event.key === 'ArrowUp':
                     if (posicionMatriz.fila > 1) {
@@ -54,6 +54,7 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                         matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0x2c2c2c)
                         valorActual = matrizOperaciones[posicionMatriz.fila][posicionMatriz.col]
                     }
+                    
                     break
                 case event.key === 'ArrowLeft':
                     if (posicionMatriz.col > 1) {
@@ -64,6 +65,7 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                         matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0x2c2c2c)
                         valorActual = matrizOperaciones[posicionMatriz.fila][posicionMatriz.col]
                     }
+                    
                     break
                 case event.key === 'ArrowRight':
                     if (posicionMatriz.col < matrizOperaciones[posicionMatriz.fila].length - 1) {
@@ -74,6 +76,8 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                         matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0x2c2c2c)
                         valorActual = matrizOperaciones[posicionMatriz.fila][posicionMatriz.col]
                     }
+                    
+                    
                     break
                 case event.key === 'Backspace':
                     valorActual.text = valorActual.text.slice(0, -1)
@@ -86,9 +90,8 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                 numerosLimite(valorActual, event.key);
             }
 
-            if (event.key === 'Enter') {
+            if (event.key === 'f' || event.code === 'KeyF') {
                 const respuestaUsuario = valorActual.text;
-
                 const filaActual = matrizOperaciones.findIndex(fila => fila.includes(valorActual));
                 const columnaActual = matrizOperaciones[posicionMatriz.fila].indexOf(valorActual);
 
@@ -98,14 +101,31 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
 
                 if (esRespuestaCorrecta) {
                     console.log('Respuesta correcta');
-                    matrizRectangulos[filaActual][columnaActual].fillColor = 0x00FF00;
+                    
                     respuestasCorrectas++;
+                    if (posicionMatriz.col < matrizOperaciones[posicionMatriz.fila].length - 1) {
+                        matrizRectangulos[posicionMatriz.fila][posicionMatriz.col].fillColor = 0x00FF00;
+                        matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0xf6f6f6);
+                        posicionMatriz.col++;
+                    } else if (posicionMatriz.fila < matrizOperaciones.length - 1) {
+                        matrizRectangulos[posicionMatriz.fila][posicionMatriz.col].fillColor = 0x00FF00;
+                        matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0xf6f6f6);
+                        posicionMatriz.col = 1;
+                        posicionMatriz.fila++;
+                    }
+                
+                    matrizRectangulos[posicionMatriz.fila][posicionMatriz.col].fillColor = 0xE7DDA3;
+                    matrizOperaciones[posicionMatriz.fila][posicionMatriz.col].setTint(0x2c2c2c);
+                    valorActual = matrizOperaciones[posicionMatriz.fila][posicionMatriz.col];
                     if (respuestasCorrectas === 12) {
-                        console.log('¡Todas las respuestas correctas!');
-                        this.scene.start('area_04', { entrada: 'arriba' });
+                        alert('¡Todas las respuestas correctas!');
+                        valorActual.setText('');
+                        this.scene.start('vendedor_pantalla_principal');
                     }
                 } else {
                     console.log('Respuesta incorrecta');
+                    console.log(`Fila: ${filaActual}, Columna: ${columnaActual}`)
+                    valorActual.setText('');
                     matrizRectangulos[filaActual][columnaActual].fillColor = 0xFF0000;
                 }
             }
@@ -134,7 +154,7 @@ function esTeclaPermitida (tecla, inputTypeNumerico = false) {
 function numerosLimite (textoObjeto, caracter) {
     let medidaLinea = textoObjeto.text.length;
 
-    if (medidaLinea == 6) {
+    if (medidaLinea == 6) { 
         textoObjeto.text = caracter
     } else if (medidaLinea < 6) {
         textoObjeto.text += caracter
