@@ -164,6 +164,8 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                         }
 
                         this.time.delayedCall(2000, () => { introResp = true }, [], this)
+                    } else if (event.key === 'Escape') {
+                        this.scene.start('vendedor_pantalla_principal');
                     }
                 }
             } else {
@@ -175,7 +177,7 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
                     } else {
                         pasarInstruccion = false
                         primeraVez = false
-                        this.time.delayedCall(2000, () => { introResp = true }, [], this)
+                        this.time.delayedCall(1000, () => { introResp = true }, [], this)
 
                     }
                 }
