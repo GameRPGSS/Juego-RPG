@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { apiUrl,style,styleButtom,styleTextArea } from './configuracion_general';
+import { apiUrl, style, styleButtom, styleTextArea } from './configuracion_general';
 import imagInfo from '../../assets/Iconos/info.png'
 
 export class modificarScene extends Phaser.Scene {
@@ -7,82 +7,94 @@ export class modificarScene extends Phaser.Scene {
         super({ key: 'modificarScene' });
     }
 
-    preload() {
+    preload () {
         this.load.image('imagenInfo', imagInfo);
     }
-    create() {
+    create () {
         this.add.image(
             this.game.canvas.width / 2,
             this.game.canvas.height / 2,
             '_fondo_basta_mate'
         ).setOrigin(0.5).setScale(0.756)
 
+        this.add.image(
+            this.game.canvas.width / 2,
+            this.game.canvas.height / 2,
+            '_fondo_formularios'
+        ).setOrigin(0.5).setScale(0.756)
+
         const it = localStorage.getItem('itemModificar');
         const item = JSON.parse(it);
 
-        const imagenInfo = this.add.image(1400, 100, 'imagenInfo');
+        const imagenInfo = this.add.image(1250, 150, 'imagenInfo');
         imagenInfo.setInteractive();
-        imagenInfo.setDisplaySize(100, 100);
+        imagenInfo.setDisplaySize(80, 80);
         imagenInfo.on('pointerdown', () => {
             this.scene.start('instrucciones_preguntas');
         });
 
-        
+        this.add.text(1250, 200, 'Cómo modificar preguntas', {
+            fontSize: '15px',
+            fontStyle: 'bold',
+            color: '#000000',
+            wordWrap: { width: 150, useAdvancedWrap: true },
+        }).setOrigin(0.5);
 
-        this.add.text(774, 100, 'Para modificar ', {
+        this.add.text(774, 160, 'Para modificar', {
             fontSize: '40px',
             fontStyle: 'bold',
             color: '#000000',
         }).setOrigin(0.5);
-        this.add.text(774, 140, 'Introduzca sus correcciones', {
+        this.add.text(774, 190, 'Introduzca sus correcciones', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         }).setOrigin(0.5);
 
-        this.add.text(380, 185, 'Contexto:', {
+        this.add.text(280, 260, 'Contexto:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(624, 230).createFromHTML(`<textarea id="contexto" placeholder="Juan necesita hacer una bomba..." style="${styleTextArea}">${item.attributes.contexto}</textarea>`);
+        this.add.dom(630, 330).createFromHTML(`<textarea id="contexto" placeholder="Juan necesita hacer una bomba..." style="${styleTextArea}">${item.attributes.contexto}</textarea>`);
 
-        this.add.text(850, 185, 'Pregunta:', {
+        this.add.text(870, 260, 'Pregunta:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(1095, 230).createFromHTML(`<textarea id="pregunta" placeholder="¿Cuánto es 7 - 2?" style="${styleTextArea}">${item.attributes.pregunta}</textarea>`);
+        this.add.dom(1160, 290).createFromHTML(`<textarea id="pregunta" placeholder="¿Cuánto es 7 - 2?" style="${styleTextArea}">${item.attributes.pregunta}</textarea>`);
 
-        this.add.text(230, 365, 'A quién se refiere:', {
+        this.add.text(255, 432, '¿A quién se refiere?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(675, 380).createFromHTML(`<input id="quien" type="text" value=${item.attributes.quien} placeholder="A quién se refiere el contexto : Juan" style="${style}">`);
+        this.add.dom(700, 444).createFromHTML(`<input id="quien" type="text" value=${item.attributes.quien} placeholder="A quién se refiere el contexto : Juan" style="${style}">`);
 
-        this.add.text(255, 410, 'A qué se refiere:', {
+        this.add.text(255, 488, '¿A qué se refiere?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(675, 430).createFromHTML(`<input id="que" type="text" value=${item.attributes.que} placeholder="A qué se refiere el contexto : Bomba" style="${style}">`);
+        this.add.dom(700, 500).createFromHTML(`<input id="que" type="text" value=${item.attributes.que} placeholder="A qué se refiere el contexto : Bomba" style="${style}">`);
 
-        this.add.text(65, 465, 'Qué operación necesita seguir:', {
+        this.add.text(250, 570, '¿Qué operación necesita seguir?:', {
+            fontSize: '25px',
+            fontStyle: 'bold',
+            wordWrap: { width: 260, useAdvancedWrap: true },
+            color: '#000000',
+        });
+        this.add.dom(700, 600).createFromHTML(`<textarea id="operaciones" placeholder="Qué operación realizas : Restar" style="${styleTextArea}">${item.attributes.operaciones}</textarea>`);
+
+        this.add.text(950, 400, '¿Cuál es la respuesta?:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(624, 510).createFromHTML(`<textarea id="operaciones" placeholder="Qué operación realizas : Restar" style="${styleTextArea}">${item.attributes.operaciones}</textarea>`);
+        this.add.dom(1100, 560).createFromHTML(`<textarea id="respuesta" placeholder="La respuesta a tu pregunta : 5" style="${styleTextArea}">${item.attributes.resultado}</textarea>`);
 
-        this.add.text(985, 365, 'Cuál es la respuesta:', {
-            fontSize: '25px',
-            fontStyle: 'bold',
-            color: '#000000',
-        });
-        this.add.dom(1095, 450).createFromHTML(`<textarea id="respuesta" placeholder="La respuesta a tu pregunta : 5" style="${styleTextArea}">${item.attributes.resultado}</textarea>`);
-
-        const loginButton = this.add.dom(774, 650).createFromHTML(`<button style="${styleButtom}">Modificar</button>`);
+        const loginButton = this.add.dom(774, 690).createFromHTML(`<button style="${styleButtom}">Modificar</button>`);
         // Eventos para procesar la información de login
         loginButton.addListener('click');
         loginButton.on('click', function () {
@@ -107,7 +119,7 @@ export class modificarScene extends Phaser.Scene {
                 return;
             }
 
-            if(verificarComas(que)===false || verificarComas(quien)===false || verificarComas(operaciones)===false || verificarComas(respuesta)===false){
+            if (verificarComas(que) === false || verificarComas(quien) === false || verificarComas(operaciones) === false || verificarComas(respuesta) === false) {
                 alert('El número de comas es incorrecto. Deben ser tres comas (",") en la cadena de Quién, Qué, Operación y Respuesta.');
                 return;
             }
@@ -123,7 +135,7 @@ export class modificarScene extends Phaser.Scene {
                     "contexto": contexto
                 }
             }
-            
+
             //Hacemos el Put de nuestros datos
             fetch(`${apiUrl}/api/vendedor-preguntas/${item.id}`, {
                 method: 'PUT',
@@ -132,26 +144,26 @@ export class modificarScene extends Phaser.Scene {
                 },
                 body: JSON.stringify(data),
             })
-            .then(response => {
-                if (response.ok) {
-                    // Usuario registrado exitosamente
-                    return response.json();
-                } else {
-                    throw new Error('Error al actualizar el recurso');
-                }
-            })
-            .then(data => {
-                // Manejar la respuesta del servidor
-                console.log('Registro exitoso:', data);
-                localStorage.removeItem('itemModificar');
-                this.scene.start('ver_preguntas')
-            })
-            .catch(error => {
-                console.error('Error al actualizar el recurso:', error);
-            });       
+                .then(response => {
+                    if (response.ok) {
+                        // Usuario registrado exitosamente
+                        return response.json();
+                    } else {
+                        throw new Error('Error al actualizar el recurso');
+                    }
+                })
+                .then(data => {
+                    // Manejar la respuesta del servidor
+                    console.log('Registro exitoso:', data);
+                    localStorage.removeItem('itemModificar');
+                    this.scene.start('ver_preguntas')
+                })
+                .catch(error => {
+                    console.error('Error al actualizar el recurso:', error);
+                });
         }, this);
 
-        const volverButton = this.add.dom(774, 700).createFromHTML(`<button style="${styleButtom}">Volver</button>`);
+        const volverButton = this.add.dom(320, 150).createFromHTML(`<button style="${styleButtom}">Volver</button>`);
         volverButton.addListener('click');
         volverButton.on('click', function () {
             localStorage.removeItem('itemModificar');
@@ -161,7 +173,7 @@ export class modificarScene extends Phaser.Scene {
 }
 export default modificarScene;
 
-function verificarComas(operaciones) {
+function verificarComas (operaciones) {
     const partes = operaciones.split(',');
     if (partes.length - 1 !== 3) {
         return false;

@@ -25,7 +25,7 @@ export class agregarScene extends Phaser.Scene {
 
         const imagenInfo = this.add.image(1250, 150, 'imagenInfo');
         imagenInfo.setInteractive();
-        imagenInfo.setDisplaySize(100, 100);
+        imagenInfo.setDisplaySize(80, 80);
 
         imagenInfo.setTint(0xffffff); // Establece un color inicial
 
@@ -34,6 +34,12 @@ export class agregarScene extends Phaser.Scene {
             this.scene.start('instrucciones_preguntas')
         });
 
+        this.add.text(1250, 200, 'Cómo agregar preguntas', {
+            fontSize: '15px',
+            fontStyle: 'bold',
+            color: '#000000',
+            wordWrap: { width: 150, useAdvancedWrap: true },
+        }).setOrigin(0.5);
 
         this.add.text(774, 160, 'Sea bienvenido maestro(a)', {
             fontSize: '40px',

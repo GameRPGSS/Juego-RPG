@@ -53,10 +53,14 @@ import _fondo_area_35 from '../../assets/Fondos/Fondo_A35.png'
 import _fondo_basta_mate from '../../assets/Fondos/Fondo_Basta_Matematico.png'
 import _fondo_pantalla_incio from '../../assets/Fondos/Fondo_Pantalla_Inicio.jpg'
 import _fondo_vegetacion from '../../assets/Fondos/Fondo_Seleccionar_Personaje.jpg'
-import _fondo_vendedor_tienda from '../../assets/Fondos/Fondo_Vendedor.png'
 import _fondo_formularios from '../../assets/Fondos/Fondo_Formularios.png'
 import _fondo_instrucciones_preguntas from '../../assets/Fondos/InstruccionesPreguntas.png'
 import _fondo_interior_casa_juan from '../../assets/Fondos/Interior_Casa_Juan_Cupul.jpg'
+import _fondo_vendedor_tienda from '../../assets/Fondos/Fondo_Vendedor.png'
+import _instruccion_basta_1 from '../../assets/Fondos/Instrucciones_Basta_1.jpg'
+import _instruccion_basta_2 from '../../assets/Fondos/Instrucciones_Basta_2.jpg'
+import _instruccion_basta_3 from '../../assets/Fondos/Instrucciones_Basta_3.jpg'
+import _instruccion_basta_4 from '../../assets/Fondos/Instrucciones_Basta_4.jpg'
 import _sprite_minijuego_pantalla_inicio from '../../assets/Fondos/MiniJuego_Pantalla_Inicio.png'
 import _pantalla_narracion from '../../assets/Fondos/Narracion.jpg'
 import _pantalla_controles from '../../assets/Fondos/Pantalla_Controles.png'
@@ -175,6 +179,10 @@ export class PrecargaImagenes extends Phaser.Scene {
         this.load.image('_fondo_formularios', _fondo_formularios)
         this.load.image('_fondo_instrucciones_preguntas', _fondo_instrucciones_preguntas)
         this.load.image('_fondo_interior_casa_juan', _fondo_interior_casa_juan)
+        this.load.image('_instruccion_basta_1', _instruccion_basta_1)
+        this.load.image('_instruccion_basta_2', _instruccion_basta_2)
+        this.load.image('_instruccion_basta_3', _instruccion_basta_3)
+        this.load.image('_instruccion_basta_4', _instruccion_basta_4)
         this.load.spritesheet('_sprite_minijuego_pantalla_inicio', _sprite_minijuego_pantalla_inicio, { frameWidth: 768, frameHeight: 432 })
         this.load.image('_pantalla_narracion', _pantalla_narracion)
         this.load.image('_pantalla_controles', _pantalla_controles)
