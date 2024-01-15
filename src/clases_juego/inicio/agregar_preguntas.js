@@ -71,14 +71,14 @@ export class agregarScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(700, 444).createFromHTML(`<input id="quien" type="text" placeholder="A quién se refiere el contexto : Juan" style="${style}">`);
+        this.add.dom(700, 444).createFromHTML(`<input id="quien" type="text" placeholder="op-correcta, op-erronea1, op-erronea2, op-erronea3" style="${style}">`);
 
         this.add.text(255, 488, 'A qué se refiere:', {
             fontSize: '25px',
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(700, 500).createFromHTML(`<input id="que" type="text" placeholder="A qué se refiere el contexto : Bomba" style="${style}">`);
+        this.add.dom(700, 500).createFromHTML(`<input id="que" type="text" placeholder="op-correcta, op-erronea1, op-erronea2, op-erronea3" style="${style}">`);
 
         this.add.text(250, 570, 'Qué operación necesita seguir:', {
             fontSize: '25px',
@@ -86,7 +86,7 @@ export class agregarScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(700, 600).createFromHTML(`<textarea id="operaciones" placeholder="Qué operación realizas : Restar" style="${styleTextArea}"></textarea>`);
+        this.add.dom(700, 600).createFromHTML(`<textarea id="operaciones" placeholder="op-correcta, op-erronea1, op-erronea2, op-erronea3" style="${styleTextArea}"></textarea>`);
 
         this.add.text(950, 400, 'Cuál es la respuesta al problema:', {
             fontSize: '25px',
@@ -94,7 +94,7 @@ export class agregarScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#000000',
         });
-        this.add.dom(1100, 560).createFromHTML(`<textarea id="respuesta" placeholder="La respuesta a tu pregunta : 5" style="${styleTextArea}"></textarea>`);
+        this.add.dom(1100, 560).createFromHTML(`<textarea id="respuesta" placeholder="op-correcta, op-erronea1, op-erronea2, op-erronea3" style="${styleTextArea}"></textarea>`);
 
         const loginButton = this.add.dom(774, 690).createFromHTML(`<button style="${styleButtom}">Agregar</button>`);
         // Eventos para procesar la información de login
