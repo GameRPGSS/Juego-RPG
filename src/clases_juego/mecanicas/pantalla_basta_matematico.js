@@ -33,6 +33,12 @@ export class Pantalla_Basta_Matematico extends Phaser.Scene {
             '_fondo_basta_mate'
         ).setOrigin(0.5).setScale(0.756)
 
+        this.add.text(80, 60, 'Presiona ESC para salir', {
+            fontSize: '24px',
+            fontStyle: 'bold',
+            color: '#000000',
+        }).setOrigin(0).setDepth(1)
+
         let a
 
         if (primeraVez) {

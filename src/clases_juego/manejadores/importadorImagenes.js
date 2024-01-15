@@ -315,7 +315,7 @@ export class PrecargaImagenes extends Phaser.Scene {
         crearAnimacion(this, '_vela_1', 'idle_vela_1', 0, 3, { frecuencia_frames: 5 })
         crearAnimacion(this, '_craneo_1', 'idle_craneo_1', 0, 3, { frecuencia_frames: 5 })
 
-        this.scene.start('basta_matematico')
+        this.scene.start('LoginScene')
     }
 
     update () {
